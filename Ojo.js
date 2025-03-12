@@ -1,10 +1,15 @@
 //En este Sketch se gestiona un Ojo que representa los minutos y segundos
 //Apoyado por el sketch de https://editor.p5js.org/jackiehu/sketches/Sy7JkKJk4
 
+//Propiedades del ojo
+var moverse;
 class Ojo{
   
   constructor(){
-    
+    this.moverse = false; //Boolean de animación de la pupila
+    this.movEstado = 0; // 0 = Moverse a la derecha, 1 = Moverse a la izquierda, 2 = Moverse de vuelta al centro y finalizar la animación
+    this.posPupila = createVector(0,0);
+    this.tiempoAnim = millis(); //Tiempo de espera para volver a realizar la animación
   }
   
   /**
@@ -29,7 +34,14 @@ class Ojo{
       line(-80,0,80,0);
     }else{
       //Iris
-      ellipse(0,0,30,30);
+      this.gestionarAnimacion();
+      
+      if(this.moverse){
+        //Actualizamos la posición de la pupila
+        this.animarPupila();
+      }
+      //Dibujamos la pupila
+      ellipse(this.posPupila.x,this.posPupila.y,30,30);
     }
   }
   
@@ -111,9 +123,57 @@ class Ojo{
       }
     }
     
+  }
+  
+  //Esta función anima la pupila del ojo
+  animarPupila(){
+    let maxDerecha = 40;
+    let maxIzquierda = -40;
+      switch(this.movEstado){
+        //Movimiento a la derecha
+        case 0: 
+          if(this.posPupila.x < maxDerecha){
+            this.posPupila.x += 0.3;
+          }else{
+            this.movEstado = 1;
+          }
+        break;
+        
+        //Movimiento a la izquierda
+        case 1:
+          if(this.posPupila.x > maxIzquierda){
+            this.posPupila.x -= 0.3;
+          }else{
+            this.movEstado = 2;
+          }
+        break;
+        
+        //Movimiento al centro
+        case 2:
+          if(this.posPupila.x < 0){
+            this.posPupila.x += 0.3;
+          }else{
+            this.movEstado = 0;
+            this.tiempoAnim = millis(); //Reseteamos el tiempo de espera
+            this.moverse = false; //Se termina la animación
+          }
+        break;
+      }
+    }
+  
+  /**
+  *Esta función se encarga de gestionar cuando debe activarse la animación de la pupila
+  */
+  gestionarAnimacion(){
     
-    
-    
+    if(!this.moverse){
+      let tiempo = millis() - this.tiempoAnim;
+      //Debe esperar 30 segundos
+      if(tiempo >= 30000){
+        this.moverse = true;  
+      }
+      
+    }
   }
   
   /**
