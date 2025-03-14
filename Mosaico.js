@@ -9,31 +9,33 @@ class Mosaico{
     this.shapes = []; //Array con las formas a rellenar el mosaico
     //Array con los colores a pintar las partes del mosaico
     this.partesColoresAM = { 0: color(255,0,0,150),
-                           1: color(0,255,0,150),
-                           2: color(0,0,255,150),
-                           3: color(255,0,255,150),
-                           4: color(0,255,255,150),
-                           5: color(255,255,0,150),
-                           6: color(255,255,125,150),
-                           7: color(125,255,255,150),
-                           8: color(255,125,255,150),
-                           9: color(255,125,125,150),
-                           10: color(125,125,255,150),
-                           11: color(125,255,125,150)};
-    
-    this.partesColoresPM = { 0: color(255,0,0,75),
-                           1: color(0,255,0,75),
-                           2: color(0,0,255,75),
-                           3: color(255,0,255,75),
-                           4: color(0,255,255,75),
-                           5: color(255,255,0,75),
-                           6: color(255,255,125,75),
-                           7: color(125,255,255,75),
-                           8: color(255,125,255,75),
-                           9: color(255,125,125,75),
-                           10: color(125,125,255,75),
-                           11: color(125,255,125,75)};
-  }
+      1: color(0,255,0,150),
+      2: color(0,0,255,150),
+      3: color(255,0,255,150),
+      4: color(0,255,255,150),
+      5: color(255,255,0,150),
+      6: color(255,255,125,150),
+      7: color(125,255,255,150),
+      8: color(255,125,255,150),
+      9: color(255,125,125,150),
+      10: color(125,125,255,150),
+      11: color(125,255,125,150)};
+
+this.partesColoresPM = { 0: color(255,0,0,75),
+      1: color(0,255,0,75),
+      2: color(0,0,255,75),
+      3: color(255,0,255,75),
+      4: color(0,255,255,75),
+      5: color(255,255,0,75),
+      6: color(255,255,125,75),
+      7: color(125,255,255,75),
+      8: color(255,125,255,75),
+      9: color(255,125,125,75),
+      10: color(125,125,255,75),
+      11: color(125,255,125,75)};
+}
+
+
   
   //Método para crear el mosaico
   createMosaico(){
@@ -230,7 +232,7 @@ class Mosaico{
   gestionPartesColores(iterator){
     
     //Comprovamos la hora
-    if(Clock.formatHora() >= iterator){
+    if(Clock.formatHora() >= iterator+1){
       //Formato AM o PM
       //Pasamos un color u otro en función de si ha oscurecido o sigue de dia
       
